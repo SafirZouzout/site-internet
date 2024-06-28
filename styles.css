@@ -10,7 +10,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
     margin: 0;
     padding: 0;
     background-color: var(--background-color);
@@ -19,63 +18,115 @@ body {
 
 header {
     background-color: var(--primary-color);
-    color: var(--text-color);
     padding: 20px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.dynamic-header {
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     justify-content: center;
-    background-color: var(--accent-color2);
-    padding: 10px 0;
 }
 
-.rectangle {
-    background-color: var(--accent-color1);
-    margin: 0 10px;
-    padding: 20px;
-    flex: 1;
-    text-align: center;
-    transition: background-color 0.3s;
+header nav ul li {
+    margin: 0 15px;
 }
 
-.rectangle a {
+header nav ul li a {
     color: var(--text-color);
     text-decoration: none;
+    font-weight: bold;
+}
+
+#hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background: var(--accent-color2);
+    color: var(--text-color);
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.hero-text {
+    max-width: 600px;
+    text-align: center;
+}
+
+.hero-text h2 {
+    font-size: 2em;
+}
+
+.hero-text p {
     font-size: 1.2em;
 }
 
-.rectangle:hover {
+.hero-text a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
     background-color: var(--primary-color);
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    background-color: var(--secondary-color);
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
     color: var(--text-color);
     text-decoration: none;
+    border-radius: 8px;
 }
 
-main {
-    padding: 20px;
-    background-color: var(--accent-color1);
-    color: var(--text-color);
+section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+section h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.project, .portfolio-item {
+    margin: 20px;
+}
+
+.project img, .portfolio-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 footer {
     background-color: var(--secondary-color);
+    padding: 20px;
+    text-align: center;
     color: var(--text-color);
-    padding: 10px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+}
+
+footer .social-media {
+    margin-bottom: 20px;
+}
+
+footer .social-media a {
+    margin: 0 10px;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+footer .legal a {
+    display: block;
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 5px 0;
 }
