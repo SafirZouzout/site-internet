@@ -23,6 +23,32 @@ header {
     padding: 20px;
 }
 
+.dynamic-header {
+    display: flex;
+    justify-content: center;
+    background-color: var(--accent-color2);
+    padding: 10px 0;
+}
+
+.rectangle {
+    background-color: var(--accent-color1);
+    margin: 0 10px;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.rectangle a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.rectangle:hover {
+    background-color: var(--primary-color);
+}
+
 nav ul {
     list-style-type: none;
     padding: 0;
