@@ -1,23 +1,53 @@
+/* Color Palette */
+:root {
+    --primary-color: #C99E53;
+    --secondary-color: #453A3A;
+    --accent-color1: #B48246;
+    --accent-color2: #E6AD5C;
+    --background-color: #5D514D;
+    --text-color: #FFFFFF;
+}
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 header {
-    background-color: #4CAF50;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     padding: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    background-color: var(--secondary-color);
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
 }
 
 main {
     padding: 20px;
+    background-color: var(--accent-color1);
+    color: var(--text-color);
 }
 
 footer {
-    background-color: #333;
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
     padding: 10px 0;
     position: fixed;
     bottom: 0;
