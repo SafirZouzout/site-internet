@@ -28,14 +28,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('project-description').textContent = project.description;
 
         const projectGallery = document.getElementById('project-gallery');
-        const imageCount = 5; // Adjust the number of images based on your folders
-
-        for (let i = 1; i <= imageCount; i++) {
-            const imgElement = document.createElement('img');
-            imgElement.src = `${folder}/image${i}.png`;
-            imgElement.alt = `${project.title} - Image ${i}`;
-            projectGallery.appendChild(imgElement);
-        }
+        
+        fetch(`${folder}/`)
+            .then(response => response.text())
+            .then(text => {
+                const parser = new DOMParser();
+                const htmlDocument = parser.parseFromString(text, "text/html");
+                const imageElements = htmlDocument.querySelectorAll("a");
+                imageElements.forEach(element => {
+                    const fileName = element.getAttribute("href");
+                    if (fileName.match(/\.(jpg|jpeg|png|gif)$/)) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = `${folder}/${fileName}`;
+                        imgElement.alt = `${project.title} - ${fileName}`;
+                        projectGallery.appendChild(imgElement);
+                    }
+                });
+            });
     } else {
         document.getElementById('project-info').textContent = 'Projet non trouvé.';
     }
