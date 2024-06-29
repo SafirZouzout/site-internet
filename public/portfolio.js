@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to get a random image from the folder
     function getRandomImage(folder, callback) {
-        fetch(`paints/${folder}/`)
+        fetch(`/public/paints/${folder}/`)
             .then(response => response.text())
             .then(text => {
                 const parser = new DOMParser();
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                  .filter(fileName => fileName.match(/\.(jpg|jpeg|png|gif)$/));
                 if (imageFiles.length > 0) {
                     const randomImage = imageFiles[Math.floor(Math.random() * imageFiles.length)];
-                    const imagePath = `paints/${folder}/${randomImage}`;
+                    const imagePath = `/public/paints/${folder}/${randomImage}`;
                     callback(imagePath);
                 } else {
                     console.error(`No images found in folder: ${folder}`);
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
-    fetch('/paints/')
+    fetch('/public/paints/')
         .then(response => response.text())
         .then(text => {
             const parser = new DOMParser();
@@ -55,6 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         })
         .catch(error => {
-            console.error('Error fetching folders from /paints/', error);
+            console.error('Error fetching folders from /public/paints/', error);
         });
 });
