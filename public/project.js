@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const projectGallery = document.getElementById('project-gallery');
         
+        // Fetch all images from the folder
         fetch(`/${folder}/`)
             .then(response => response.text())
             .then(text => {
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const imageElements = htmlDocument.querySelectorAll("a");
                 imageElements.forEach(element => {
                     const fileName = element.getAttribute("href");
-                    if (fileName.match(/\.(jpg|jpeg|png|gif)$/)) {
+                    if (fileName.match(/\.(jpg|jpeg|png|gif|png)$/)) {
                         const imgElement = document.createElement('img');
                         imgElement.src = `/${folder}/${fileName}`;
                         imgElement.alt = `${project.title} - ${fileName}`;

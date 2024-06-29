@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectElement = document.createElement('div');
         projectElement.classList.add('portfolio-item');
 
-        const thumbnail = `/${project.folder}/thumbnail.png`;
+        // Load the first image in the folder as the thumbnail
+        const thumbnail = `/${project.folder}/` + getFirstImage(project.folder);
         projectElement.innerHTML = `
             <img src="${thumbnail}" alt="${project.title}">
             <p>${project.title}</p>
@@ -40,4 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         portfolioContainer.appendChild(projectElement);
     });
+
+    function getFirstImage(folder) {
+        let firstImage = 'default-thumbnail.png'; // default image in case the folder is empty
+        fetch(`/${folder}/`)
+            .then(response => response.text())
+            .then(text => {
+                const parser = new DOMParser();
+                const htmlDocument = parser.parseFromString(text, "text/html");
+                const imageElements = htmlDocument.querySelectorAll("a");
+                imageElements.forEach(element => {
+                    const fileName = element.getAttribute("href");
+                    if (fileName.match(/\.(jpg|jpeg|png|gif|png)$/)) {
+                        firstImage = fileName;
+                        return false; // Break the loop
+                    }
+                });
+            });
+        return firstImage;
+    }
 });
