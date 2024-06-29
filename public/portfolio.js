@@ -1,31 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     const portfolioContainer = document.getElementById('portfolio-container');
 
-    // Function to get the first image in the folder
-    function getFirstImage(folder, callback) {
+    // Function to get a random image from the folder
+    function getRandomImage(folder, callback) {
         fetch(`paints/${folder}/`)
             .then(response => response.text())
             .then(text => {
                 const parser = new DOMParser();
                 const htmlDocument = parser.parseFromString(text, "text/html");
-                const imageElements = htmlDocument.querySelectorAll("a");
-                let firstImage = null;
-                imageElements.forEach(element => {
-                    const fileName = element.getAttribute("href");
-                    if (fileName.match(/\.(jpg|jpeg|png|gif)$/)) {
-                        firstImage = `paints/${folder}/${fileName}`;
-                        return false; // Break the loop
-                    }
-                });
-                if (firstImage) {
-                    console.log(`First image in ${folder}: ${firstImage}`);
-                    callback(firstImage);
+                const imageElements = Array.from(htmlDocument.querySelectorAll("a"));
+                const imageFiles = imageElements.map(element => element.getAttribute("href"))
+                                                 .filter(fileName => fileName.match(/\.(jpg|jpeg|png|gif)$/));
+                if (imageFiles.length > 0) {
+                    const randomImage = imageFiles[Math.floor(Math.random() * imageFiles.length)];
+                    const imagePath = `paints/${folder}/${randomImage}`;
+                    callback(imagePath);
                 } else {
                     console.error(`No images found in folder: ${folder}`);
+                    callback(null);
                 }
             })
             .catch(error => {
                 console.error(`Error fetching images from folder: ${folder}`, error);
+                callback(null);
             });
     }
 
@@ -34,23 +31,24 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(text => {
             const parser = new DOMParser();
             const htmlDocument = parser.parseFromString(text, "text/html");
-            const folderElements = htmlDocument.querySelectorAll("a");
+            const folderElements = Array.from(htmlDocument.querySelectorAll("a"));
             folderElements.forEach(element => {
                 const folderName = element.getAttribute("href").replace('/', '');
                 if (folderName && !folderName.includes('.')) { // Ensure it's a folder
-                    getFirstImage(folderName, (thumbnail) => {
-                        if (thumbnail) {
-                            console.log(`Thumbnail for ${folderName}: ${thumbnail}`);
+                    getRandomImage(folderName, (randomImage) => {
+                        if (randomImage) {
                             const projectElement = document.createElement('div');
                             projectElement.classList.add('portfolio-item');
                             projectElement.innerHTML = `
-                                <img src="${thumbnail}" alt="${folderName}" onerror="this.onerror=null; this.src='default-thumbnail.png'">
+                                <img src="${randomImage}" alt="${folderName}">
                                 <p>${folderName}</p>
                             `;
                             projectElement.addEventListener('click', () => {
                                 window.location.href = `project.html?folder=${encodeURIComponent(folderName)}`;
                             });
                             portfolioContainer.appendChild(projectElement);
+                        } else {
+                            console.error(`Could not load image for ${folderName}`);
                         }
                     });
                 }
