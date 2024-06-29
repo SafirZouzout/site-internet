@@ -39,10 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (folderName && !folderName.includes('.')) { // Ensure it's a folder
                     getFirstImage(folderName, (thumbnail) => {
                         if (thumbnail) {
+                            console.log(`Thumbnail for ${folderName}: ${thumbnail}`);
                             const projectElement = document.createElement('div');
                             projectElement.classList.add('portfolio-item');
                             projectElement.innerHTML = `
-                                <img src="${thumbnail}" alt="${folderName}">
+                                <img src="${thumbnail}" alt="${folderName}" onerror="this.onerror=null; this.src='default-thumbnail.png'">
                                 <p>${folderName}</p>
                             `;
                             projectElement.addEventListener('click', () => {
