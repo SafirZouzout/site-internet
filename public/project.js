@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projectGallery = document.getElementById('project-gallery');
 
     // Fetch all images from the folder
-    fetch(`/paints/${folder}/`)
+    fetch(`paints/${folder}/`)
         .then(response => response.text())
         .then(text => {
             const parser = new DOMParser();
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const fileName = element.getAttribute("href");
                 if (fileName.match(/\.(jpg|jpeg|png|gif)$/)) {
                     const imgElement = document.createElement('img');
-                    imgElement.src = `/paints/${folder}/${fileName}`;
+                    imgElement.src = `paints/${folder}/${fileName}`;
                     imgElement.alt = `${folder} - ${fileName}`;
                     projectGallery.appendChild(imgElement);
                 }
