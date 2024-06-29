@@ -1,10 +1,11 @@
+// portfolio.js
 document.addEventListener('DOMContentLoaded', () => {
     const portfolioContainer = document.getElementById('portfolio-container');
 
     // Function to get a random image from the folder
     async function getRandomImage(folder) {
         try {
-            const response = await fetch(`/paints/${folder}`);
+            const response = await fetch(`paints/${folder}/`);
             const text = await response.text();
             const parser = new DOMParser();
             const htmlDocument = parser.parseFromString(text, "text/html");
@@ -13,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .filter(fileName => fileName.match(/\.(jpg|jpeg|png|gif)$/));
             if (imageFiles.length > 0) {
                 const randomImage = imageFiles[Math.floor(Math.random() * imageFiles.length)];
-                return `/paints/${folder}/${randomImage}`;
+                return `paints/${folder}/${randomImage}`;
             } else {
                 console.error(`No images found in folder: ${folder}`);
                 return null;
@@ -26,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadPortfolio() {
         try {
-            const response = await fetch('/paints/');
+            const response = await fetch('paints/');
             const text = await response.text();
             const parser = new DOMParser();
             const htmlDocument = parser.parseFromString(text, "text/html");

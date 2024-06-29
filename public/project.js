@@ -1,3 +1,4 @@
+// project.js
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const folder = urlParams.get('folder');
