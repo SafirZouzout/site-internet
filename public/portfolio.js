@@ -17,7 +17,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         return false; // Break the loop
                     }
                 });
-                callback(firstImage);
+                if (firstImage) {
+                    callback(firstImage);
+                } else {
+                    console.error(`No images found in folder: ${folder}`);
+                }
+            })
+            .catch(error => {
+                console.error(`Error fetching images from folder: ${folder}`, error);
             });
     }
 
@@ -29,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const folderElements = htmlDocument.querySelectorAll("a");
             folderElements.forEach(element => {
                 const folderName = element.getAttribute("href").replace('/', '');
-                if (folderName) {
+                if (folderName && !folderName.includes('.')) { // Ensure it's a folder
                     getFirstImage(folderName, (thumbnail) => {
                         if (thumbnail) {
                             const projectElement = document.createElement('div');
@@ -46,5 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+        })
+        .catch(error => {
+            console.error('Error fetching folders from /paints/', error);
         });
 });
