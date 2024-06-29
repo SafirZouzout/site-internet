@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
                 if (firstImage) {
+                    console.log(`First image in ${folder}: ${firstImage}`);
                     callback(firstImage);
                 } else {
                     console.error(`No images found in folder: ${folder}`);
