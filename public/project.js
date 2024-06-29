@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const folder = urlParams.get('folder');
 
     const projectDetails = {
-        'Émotions animées': {
+        'Émotions Animées': {
             title: 'Émotions animées',
             description: 'Ici les émotions prennent la dimension du plan matérielle avec lequel nous les ressentons et les exprimons pour palier aux failles du langage et renforcer notre communication picturale.'
         },
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const projectGallery = document.getElementById('project-gallery');
         
-        fetch(`${folder}/`)
+        fetch(`/${folder}/`)
             .then(response => response.text())
             .then(text => {
                 const parser = new DOMParser();
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const fileName = element.getAttribute("href");
                     if (fileName.match(/\.(jpg|jpeg|png|gif)$/)) {
                         const imgElement = document.createElement('img');
-                        imgElement.src = `${folder}/${fileName}`;
+                        imgElement.src = `/${folder}/${fileName}`;
                         imgElement.alt = `${project.title} - ${fileName}`;
                         projectGallery.appendChild(imgElement);
                     }

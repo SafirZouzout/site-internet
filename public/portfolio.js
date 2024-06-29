@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const projects = [
         {
-            folder: 'Émotions animées',
+            folder: 'Émotions Animées',
             title: 'Émotions animées',
             description: 'Ici les émotions prennent la dimension du plan matérielle avec lequel nous les ressentons et les exprimons pour palier aux failles du langage et renforcer notre communication picturale.'
         },
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const projectElement = document.createElement('div');
         projectElement.classList.add('portfolio-item');
 
-        const thumbnail = `${project.folder}/thumbnail.png`;
+        const thumbnail = `/${project.folder}/thumbnail.png`;
         projectElement.innerHTML = `
             <img src="${thumbnail}" alt="${project.title}">
             <p>${project.title}</p>
